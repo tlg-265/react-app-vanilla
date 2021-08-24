@@ -1,10 +1,11 @@
 import React, { Suspense } from 'react';
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
+import { ReactLazyPreload } from './utils/Functions';
 import './App.css';
 
 import Page1 from './components/Page1';
 import Page2 from './components/Page2';
-const Page3 = React.lazy(() => import(/* webpackChunkName: "page-3" */ './components/Page3'));
+const Page3 = ReactLazyPreload(() => import(/* webpackChunkName: "page-3" */ './components/Page3'));
 
 function App() {
   return (

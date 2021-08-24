@@ -1,6 +1,13 @@
 import React from 'react';
+import { ReactLazyPreload } from '../utils/Functions';
+
+const Page3 = ReactLazyPreload(() => import(/* webpackChunkName: "page-3" */ './Page3'));
 
 class Page2 extends React.Component {
+
+  componentDidMount() {
+    Page3.preload();
+  }
 
   handleNext = (e) => {
     e.preventDefault();
