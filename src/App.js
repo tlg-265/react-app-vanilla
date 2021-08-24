@@ -1,24 +1,22 @@
-import logo from './logo.svg';
+import React, { Suspense } from 'react';
+import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 import './App.css';
+
+import Page1 from './components/Page1';
+import Page2 from './components/Page2';
+const Page3 = React.lazy(() => import(/* webpackChunkName: "page-3" */ './components/Page3'));
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <Router history={window.history}>
+      <Switch>
+        <Route exact path="/" component={Page1} />
+        <Route path="/page-2" component={Page2} />
+        <Suspense fallback={"Loading"}>
+          <Route path="/page-3" component={Page3} />
+        </Suspense>
+      </Switch>
+    </Router>
   );
 }
 
